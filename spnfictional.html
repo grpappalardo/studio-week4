@@ -72,19 +72,42 @@
     .mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
       border-bottom-color: rgb(61, 59, 59);
     }
+    
+    a:link {
+  color: black; 
+  background-color: transparent; 
+  text-decoration: none;
+}
+
+  a:visited {
+  color: black:
+  background-color: transparent;
+  text-decoration: none;
+}
   </style>
 </head>
 
 <body>
-  <h1 style= "color:darkcyan; font: serif">Studio Week 4<br>Food Banks in San Francisco</h1>
+  <h1 style= "color:darkcyan; font: serif">Studio Week 4<br>American Towns That Don't Exist</h1>
   <!-- Add multiple pages to web page-->
   <!-- active class displays the grey box around current page-->
   <ul style= "color:darkcyan; font: serif">
-    <li><a href="index.html" target="_self">O RATS leaflet map</a></li>
-    <li><a class="active" href="sheet.html" target="_self">Food Banks in SF</a></li>
-    <li><a href="spnfictional.html" target="_self">American Towns That Don't Exist</a></li>
+  <li><a href="index.html" target="_self">O RATS leaflet map</a></li>
+  <li><a href="sheet.html" target="_self">SF Sheet Map</a></li>
+  <li><a class="active" href="spnfictional.html" target="_self">American Towns That Don't Exist</a></li>
   </ul>
-
+  <div style= "color:cadetblue; font: sans-serif">
+  <p> I have a fascination with precise fictional locations. As a girl I loved reading Down the Rabbit Hole by Peter Abrahams and knowing this fictional detective, Ingrid, 
+    ‘lived’ down the road from me, in my home state, in a place I could imagine, almost touch.</p> 
+  <p>I grew up. She didn’t. Echo Falls remains, a partial pastiche of real life Beacon Falls, and  a partial world unto itself. I still dream of going there, and up north, 
+     to the real cold of Yellowknife, which is somehow both real and not in my mind, because it was part of that other world. Almost as far away as Narnia.</p>
+  <p>When I was a teenager I gulped down the first 6 seasons of Supernatural. The old ones, with the dim lighting and bloody openings. It made me laugh and cry and grip 
+     onto the particulars of this fictional world flitting around next to my own. This imperfect, silly, dead serious cult show will forever be in my heart and brain, and 
+     I find it peculiarly fitting that I have now applied my new, practical, real life mapping skills to show a few places that don’t exist.</p> 
+  <p>Except they do, in the imagination, on the small screen, and in the dusty, never-really gone corners of the Internet. This marvelous list of Fictional Locations on the <a href="http://supernaturalwiki.com/Fictional_Locations" target="_blank">
+    Supernatural Wiki</a>, from which I created a little reminder of the power and joy of imagining possible worlds, precise and made up lat/long and all.</p>
+  </div>
+  
   <div id='map'></div>
   <script>
 
@@ -100,12 +123,12 @@
     };
     //YOUR TURN: add your Mapbox token
     
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JwYXBwYWxhcmRvIiwiYSI6ImNrbmt1anRqeTBjbWgyd281dWp5NmoybGkifQ.e-SFcyplRcWgQUAml4R1-Q'; //Mapbox token 
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JwYXBwYWxhcmRvIiwiYSI6ImNrbjk4eDUzZDA4emwycG9oNGgwd2d1ZXoifQ.dhSdtyE_eokJMYVaDAXDmg'; //Mapbox token 
     var map = new mapboxgl.Map({
       container: 'map', // container id
-      style: 'mapbox://styles/mapbox/navigation-day-v1', 
-      center: [-122.411, 37.785], // starting position [lng, lat]
-      zoom: 10,// starting zoom
+      style: 'mapbox://styles/grpappalardo/cko93nn1t0czt18unon2b6eb9', 
+      center: [39.8283, -98.5795], // starting position [lng, lat]
+      zoom: 5,// starting zoom
       transformRequest: transformRequest
     });
 
@@ -113,7 +136,7 @@
       $.ajax({
         type: "GET",
         //YOUR TURN: Replace with csv export link
-        url: 'https://docs.google.com/spreadsheets/d/1qVZhTRsLupUD5RwjN-9Lo-vss1HOtA2jqPGOm84WAGQ/gviz/tq?tqx=out:csv&sheet=SFFoodBanks',
+        url: 'https://docs.google.com/spreadsheets/d/1hPNTcTsvnui6KSDaIGT_qayk3RI8yext-WlPlChiY9U//gviz/tq?tqx=out:csv&sheet=SPN_locations',
         dataType: "text",
         success: function (csvData) { makeGeoJSON(csvData); }
       });
@@ -128,7 +151,7 @@
         }, function (err, data) {
           map.on('load', function () {
 
-            //Add the layer to the map
+            //Add the the layer to the map
             map.addLayer({
               'id': 'csvData',
               'type': 'circle',
@@ -138,7 +161,7 @@
               },
               'paint': {
                 'circle-radius': 5,
-                'circle-color': "orange"
+                'circle-color': "black"
               }
             });
 
@@ -151,7 +174,7 @@
               //set popup text
               //You can adjust the values of the popup to match the headers of your CSV.
               // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
-              var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h4>` + `<b>` + `Address: ` + `</b>` + e.features[0].properties.Address + `</h4>` + `<h4>` + `<b>` + `Phone: ` + `</b>` + e.features[0].properties.Phone + `</h4>`;
+              var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h4>` + `<b>` + `Location: ` + `</b>` + e.features[0].properties.Place + `</h4>` + `<h4>` + `<b>` + `State: ` + `</b>` + e.features[0].properties.State + `</h4>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
