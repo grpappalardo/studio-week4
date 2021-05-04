@@ -17,10 +17,10 @@
     }
 
     #map {
-      position: fixed;
-      top: 250px;
       bottom: 0;
-      width: 100%;
+      margin: auto;
+      width: 80vw;
+      height: 50vh;
     }
 
     /* Popup styling */
@@ -96,16 +96,17 @@
   <li><a href="sheet.html" target="_self">SF Sheet Map</a></li>
   <li><a class="active" href="spnfictional.html" target="_self">American Towns That Don't Exist</a></li>
   </ul>
-  <div style= "color:cadetblue; font: sans-serif">
-  <p> I have a fascination with precise fictional locations. As a girl I loved reading Down the Rabbit Hole by Peter Abrahams and knowing this fictional detective, Ingrid, 
-    ‘lived’ down the road from me, in my home state, in a place I could imagine, almost touch.</p> 
-  <p>I grew up. She didn’t. Echo Falls remains, a partial pastiche of real life Beacon Falls, and  a partial world unto itself. I still dream of going there, and up north, 
-     to the real cold of Yellowknife, which is somehow both real and not in my mind, because it was part of that other world. Almost as far away as Narnia.</p>
-  <p>When I was a teenager I gulped down the first 6 seasons of Supernatural. The old ones, with the dim lighting and bloody openings. It made me laugh and cry and grip 
-     onto the particulars of this fictional world flitting around next to my own. This imperfect, silly, dead serious cult show will forever be in my heart and brain, and 
-     I find it peculiarly fitting that I have now applied my new, practical, real life mapping skills to show a few places that don’t exist.</p> 
-  <p>Except they do, in the imagination, on the small screen, and in the dusty, never-really gone corners of the Internet. This marvelous list of Fictional Locations on the <a href="http://supernaturalwiki.com/Fictional_Locations" target="_blank">
-    Supernatural Wiki</a>, from which I created a little reminder of the power and joy of imagining possible worlds, precise and made up lat/long and all.</p>
+  <div style= "color:dimgrey; font: sans-serif">
+    <p> I have a fascination with precise fictional locations. As a girl, I loved reading <i>Down the Rabbit Hole</i> by Peter Abrahams and knowing Ingrid
+    lived down the road from me, in my home state. Her town was a place I could imagine, almost touch.</p>
+  <p>I grew up. She didn’t. Echo Falls remains as it was and always will be, a partial pastiche of real life Beacon Falls, Connecticut and a world unto itself. I still dream of going there, and up north,
+     to the real cold of Yellowknife, which is somehow both real and not in my mind, because it was part of that other place. A Google search and a world away.</p>
+  <p>When I was a teenager I gulped down the first 6 seasons of Supernatural. The old ones, with the dim lighting and bloody openings. I watched Sam and Dean drive a dusty heroes' path across my nation, which I have only traversed
+    myself by car <a href="https://uploads.knightlab.com/storymapjs/a559a5a2212819178b25774dd9261f80/pappalardo-lab1/index.html" target="_blank">lately.</a>
+  </p> <p>It made me laugh and cry and long for the Americana--never mind it was filmed in British Columbia.</p> This imperfect, silly, dead serious cult show will forever be in my heart and brain, and
+     I find it peculiarly fitting that I have now applied my new, practical, real life skills to map a few places that don’t exist.</p>
+  <p>Except they do, in the imagination, on the small screen, and in the dusty, never-really gone corners of the Internet. This marvelous list of fictional locations is from the <a href="http://supernaturalwiki.com/Fictional_Locations" target="_blank">
+    Supernatural Wiki</a> are the source of my little map, which I created as a reminder of the power and joy of imagining possible worlds, precisely fictional lat/long and all.</p>
   </div>
   
   <div id='map'></div>
@@ -127,7 +128,7 @@
     var map = new mapboxgl.Map({
       container: 'map', // container id
       style: 'mapbox://styles/grpappalardo/cko93nn1t0czt18unon2b6eb9', 
-      center: [39.8283, -98.5795], // starting position [lng, lat]
+      center: [-98.5795, 39.8283], // starting position [lng, lat]
       zoom: 5,// starting zoom
       transformRequest: transformRequest
     });
@@ -136,7 +137,7 @@
       $.ajax({
         type: "GET",
         //YOUR TURN: Replace with csv export link
-        url: 'https://docs.google.com/spreadsheets/d/1hPNTcTsvnui6KSDaIGT_qayk3RI8yext-WlPlChiY9U//gviz/tq?tqx=out:csv&sheet=SPN_locations',
+        url: 'https://docs.google.com/spreadsheets/d/1hPNTcTsvnui6KSDaIGT_qayk3RI8yext-WlPlChiY9U/gviz/tq?tqx=out:csv&sheet=SPN_locations',
         dataType: "text",
         success: function (csvData) { makeGeoJSON(csvData); }
       });
